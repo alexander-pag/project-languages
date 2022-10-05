@@ -5,10 +5,10 @@ from AnalyzerLL1 import *
 import os
 os.system("")
 #
-productions = [["S", "S + P"], ["S", "P int"], 
+productions = [["S", "S + P"], ["S", "P int"],
                ["P", "P * C"], ["P", "¿ K ?"],
-               ["K", "K amd"], ["K", "( C )"], 
-               ["T", "len P"], ["T", "from T P"], 
+               ["K", "K amd"], ["K", "( C )"],
+               ["T", "len P"], ["T", "from T P"],
                ["C", "C id"], ["C", "5.0"], ["C", "asus"]]
 """
 S-> S + P | P int
@@ -26,20 +26,30 @@ initial = "S"
 result = PrepareProduction.DeleteRecursionLeft(
     PrepareProduction(noTerminals, initial, productions))
 
+for res in result:
+    # imprimir por consola la gramatica con colores para diferenciar NOTERMINALES y TERMINALES
+    print(Colors.CYAN + "{}".format(res[0]), Colors.RED +
+          "->", Colors.PURPLE + "{}".format(res[1]))
+
 
 r1 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "S")
-r2 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "P")
-r3 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "P'")
-r4 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "S'")
-r5 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "C")
+r2 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "S'")
+r3 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "P")
+r4 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "P'")
+r5 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "K")
+r6 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "K'")
+r7 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "T")
+r8 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "C")
+r9 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "C'")
 
 
 print("S", r1)
-print("P", r2)
-print("P'", r3)
-print("S'", r4)
-print("C", r5)
+print("S'", r2)
+print("P", r3)
+print("P'", r4)
+print("K", r5)
+print("K'", r6)
+print("T", r7)
+print("C", r8)
+print("C'", r9)
 
-for res in result:
-    #imprimir por consola la gramatica con colores para diferenciar NOTERMINALES y TERMINALES
-    print(Colors.CYAN + "{}".format(res[0]), Colors.RED + "->", Colors.PURPLE + "{}".format(res[1]))
