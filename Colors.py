@@ -1,3 +1,4 @@
+# Clase para dar mejor apariencia al imprimir por la terminal del editor
 class Colors:
     RED = '\033[31m'
     GREEN = '\033[32m'

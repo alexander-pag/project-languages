@@ -1,9 +1,11 @@
 from PrepareProduction import *
 from Colors import *
 from AnalyzerLL1 import *
-
 import os
+
 os.system("")
+
+
 #
 productions = [["S", "S + P"], ["S", "P int"],
                ["P", "P * C"], ["P", "¿ K ?"],
@@ -17,7 +19,7 @@ K-> K amd | ( C )
 T-> len P | from T P
 C-> C id | 5.0 | asus
 """
-noTerminals = ["S", "P", "K", "C"]
+noTerminals = ["S", "P", "K", "T", "C"]
 # ??
 z = []
 # S
@@ -26,11 +28,15 @@ initial = "S"
 result = PrepareProduction.DeleteRecursionLeft(
     PrepareProduction(noTerminals, initial, productions))
 
+print(Colors.YELLOW + "Gramatica ya aplicada recursion izquierda")
 for res in result:
     # imprimir por consola la gramatica con colores para diferenciar NOTERMINALES y TERMINALES
     print(Colors.CYAN + "{}".format(res[0]), Colors.RED +
           "->", Colors.PURPLE + "{}".format(res[1]))
 
+
+# Primeros
+"""
 
 r1 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "S")
 r2 = AnalyzerLL1.SearchFirst(AnalyzerLL1(noTerminals, initial, result), "S'")
@@ -53,3 +59,7 @@ print("T", r7)
 print("C", r8)
 print("C'", r9)
 
+"""
+
+s1 = AnalyzerLL1.SearchNext(AnalyzerLL1(noTerminals, initial, result), "C")
+print(s1)
